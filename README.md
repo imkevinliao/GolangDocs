@@ -1,7 +1,6 @@
 # GolangDocs
 
 # 入门指南
-
 go run gofile.go
 
 package command-line-arguments is not a main package
@@ -14,4 +13,8 @@ func main(){
     fmt.Println("hello world.")
 }
 ```
+go build gofile.go
+
+会生成可执行程序，通常调试情况下我们使用 go run.
+
 
