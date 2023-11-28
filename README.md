@@ -1,6 +1,6 @@
 # GolangDocs
 
-# 入门指南
+# 快速入门
 go run gofile.go
 
 package command-line-arguments is not a main package
@@ -17,5 +17,10 @@ func main(){
 注：go build gofile.go，会生成可执行程序，通常调试情况下我们使用 go run.
 
 go run --work main.go 可以查看临时文件的位置
+
+## 样例
+```
+```
+
 
 
