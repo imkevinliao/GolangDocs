@@ -2,7 +2,7 @@
 
 # 入门指南
 
-go run [filename]
+go run gofile.go
 
 package command-line-arguments is not a main package
 
