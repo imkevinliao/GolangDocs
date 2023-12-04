@@ -1,9 +1,9 @@
 # GolangDocs
-web:
+网站:
 1. gin <https://github.com/gin-gonic/gin>
 2. beego <https://github.com/beego/beego>
 
-micro server:
+微服务:
 1. go kit
 2. Istio
 
