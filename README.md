@@ -42,4 +42,7 @@ go run --work main.go 可以查看临时文件的位置
 ## 引号
 在GO中，单引号 '' 表示的是 ASCII ， 双引号 "" 表示的是字符串， 反引号 `` 表示的是原生字符串 
 
+gopath
+
+go mod init
 
