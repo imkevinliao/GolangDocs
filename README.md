@@ -23,6 +23,8 @@
 
 https://www.yuque.com/aceld/golang/uh0124
 
+https://zerotomastery.io/blog/golang-practice-projects
+
 # 快速入门
 go run gofile.go
 
