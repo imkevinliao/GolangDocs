@@ -26,3 +26,5 @@ func main() {
 	db.Create(&user)
 }
 ```
+# ORM
+https://gorm.io/zh_CN/docs/index.html
