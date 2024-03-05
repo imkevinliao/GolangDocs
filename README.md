@@ -1,3 +1,5 @@
+# Golang Notes
+1. [数据库](./markdown/database.md)
 # GolangDocs
 网站:
 1. gin <https://github.com/gin-gonic/gin>
