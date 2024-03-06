@@ -29,7 +29,7 @@ func main() {
 # ORM
 https://gorm.io/zh_CN/docs/index.html
 
-```
+```golang
 package main
 
 import (
