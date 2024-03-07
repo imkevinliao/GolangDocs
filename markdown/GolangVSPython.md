@@ -23,3 +23,34 @@ Python 和 Golang 中最奇怪的是对于 commit 的提交。因为是先使用
 
 编程语言一定是使用ORM的，如果使用SQL原生语句，代码会极度麻烦，尤其是代码越来越复杂，需要维护的时候那真的是个灾难，但是所有的ORM都必须要支持SQL原生语句，因为必要时候还是需要，
 所有的一切都是为了更便捷的写代码，使用ORM是，使用SQL也是。
+
+# 切片
+这是一个很简单的问题，将字符串转变成可迭代对象。在Python中，我几乎没有认真思考过这件事情，准确说是完全没有。
+看下python的实现：简直是没有任何思考
+```python
+my_str = "hello, 世界"
+my_list = list(my_str)
+print(my_list)
+```
+看下go的实现
+```go
+package main
+
+import "fmt"
+
+func main() {
+	mySlice := []rune("hello, 世界")
+	fmt.Println(string(mySlice))
+}
+```
+乍一看是不是感觉go也没有很复杂，但是如果我把python代码修改成下面的形式:
+```python3
+print(list("hello, 世界"))
+```
+Go的代码看着很多，但实际上已经是很精炼了，它拆开来的话可以再多写一倍的代码量。
+
+这里特别强调rune=int32，而int32=4Bytes，一个Unicode编码可能使用2，3个字节，但肯定不超过四个字节。
+虽然代码很简单，但是它底层做的是将字符串视作Unicode编码，以数字的形式存储在切片中，
+所以最后打印的时候需要使用string来转换。
+
+很多时候Python习以为常的东西，往往不加以思考，`take it for granted`。
