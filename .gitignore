@@ -61,3 +61,8 @@ node_modules/
 
 # GoLand-specific
 .goland/
+
+# 我的ignore
+*temp*
+*test*
+*demo*
