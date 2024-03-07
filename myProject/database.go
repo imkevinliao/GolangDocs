@@ -63,7 +63,10 @@ func GenerateInfo() (u *User) {
 }
 
 func DbOperation(db *gorm.DB) {
-	db.AutoMigrate(&User{})
+	err := db.AutoMigrate(&User{})
+	if err != nil {
+		panic("Database Migrate Wrong!")
+	}
 	var length = 3
 	var UserSlice []*User
 	for i := 0; i < length; i++ {

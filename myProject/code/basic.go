@@ -8,11 +8,11 @@ import (
 )
 
 func RandomString(n int) string {
-	var letters = []int32("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
+	var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
 
 	// 为了每次生成的随机数不同，需要初始化随机数种子
 	rand.New(rand.NewSource(time.Now().UnixNano()))
-	s := make([]int32, n)
+	s := make([]rune, n)
 	for i := range s {
 		s[i] = letters[rand.Intn(len(letters))]
 	}
