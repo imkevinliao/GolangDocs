@@ -12,3 +12,46 @@
 因为第二次使用 * ，在Golang中表示的是解引用，也就是说，第二次使用的时候就还原回了结构体。完全不存在套娃行为。
 
 忽然意识到，原来我并不是讨厌指针，我只是讨厌没有边界感的指针！
+
+# 抽象接口
+```go
+type Program interface {
+	hello() string
+	add(int, float32) float64
+	connect(string, string, int) string
+}
+
+type Python struct {
+	Name   string
+	Friend string
+	Age    float64
+	Money  float32
+	Mac    int
+	Hi     string
+}
+
+func (py Python) hello() string {
+	return py.Hi
+}
+
+func (py Python) add(a int, b float32) float64 {
+	c := float64(a) + float64(b)
+	d := float64(py.Money) + py.Age
+	return c + d
+}
+
+func (py Python) connect(s1, s2 string, num int) string {
+	str := fmt.Sprint("%s,%s,%d", py.Name, py.Friend, py.Mac)
+	return str
+}
+func DemoInterface() {
+	python := Python{"python", "c and c++", 30, 238945723957.43545, 100, "I'm rich!"}
+	fmt.Println(python.hello())
+	fmt.Println(python.add(1, 1.2))
+	fmt.Println(python.connect("s1", "s2", 1))
+}
+```
+在很多语言里都有抽象方法，听了不同编程语言的说明，都是基于类进行讲解的，感觉不够清晰。而Golang这种简单明了的形式，有种醍醐灌顶的感觉。
+这种将方法绑定到指定结构体的形式，真的是太奇怪了。这里的代码都是对抽象接口的实现，事实上接口的定义和实现有一定偏差也是可以编译成功的，
+这点真让人困惑，毕竟对于一个连花括号是否换行都不允许的语言，竟然会有如此大的宽容度。
+
