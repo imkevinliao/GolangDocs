@@ -1,9 +1,9 @@
 # Golang Notes
 [Golang 总会被不经意间的细节所打败](./markdown/golang.md)
 
-[数据库和 ORM 专栏](./markdown/database.md)
+[专栏 数据库和 ORM](./markdown/database.md)
 
-[Go和Python的对比分析](./markdown/golangVSpython.md)
+[专栏 Go和Python的对比分析](./markdown/golangVSpython.md)
 # GolangDocs
 网站:
 1. gin <https://github.com/gin-gonic/gin>
