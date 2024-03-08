@@ -3,9 +3,13 @@ package code
 import (
 	"encoding/json"
 	"fmt"
+	"io"
 	"log"
 	"math/rand"
+	"os"
 	"path/filepath"
+	"reflect"
+	"strings"
 	"time"
 )
 
@@ -87,6 +91,7 @@ func Map2Struct() {
 	if err != nil {
 		panic("convert map to json failed!")
 	}
+	fmt.Println(string(jsonBytes))
 	rover := MarsRover{}
 	err = json.Unmarshal(jsonBytes, &rover)
 	if err != nil {
@@ -101,6 +106,7 @@ func Struct2Map() {
 	if err != nil {
 		panic("convert struct to json failed!")
 	}
+	fmt.Println(string(jsonBytes))
 	var data map[string]interface{}
 	err = json.Unmarshal(jsonBytes, &data)
 	if err != nil {
@@ -110,6 +116,53 @@ func Struct2Map() {
 }
 
 func DemoConvert() {
+	// 可以看到无论是map还是struct都可以转成json数据，但是反之则不一定
 	Struct2Map()
+	fmt.Println(strings.Repeat("*", 100))
 	Map2Struct() // 注意这里map的id字段是字符串
+}
+
+type MarsRover2 struct {
+	Name       string `json:"name"`
+	LaunchDate string `json:"launchDate"`
+	Status     string `json:"status"`
+}
+
+func DemoJson() {
+	// struct 写法
+	var dataA []MarsRover2
+	dataA = append(dataA, MarsRover2{Name: "Perseverance", LaunchDate: "2020-07-30", Status: "Active"})
+	dataA = append(dataA, MarsRover2{Name: "Curiosity", LaunchDate: "2011-11-26", Status: "Active"})
+	dataA = append(dataA, MarsRover2{Name: "Spirit", LaunchDate: "2003-06-10", Status: "Inactive"})
+	// map 写法
+	var dataB []map[string]string
+	dataB1 := map[string]string{"name": "Perseverance", "launchDate": "2020-07-30", "status": "Active"}
+	dataB2 := map[string]string{"name": "Curiosity", "launchDate": "2011-11-26", "status": "Active"}
+	dataB3 := map[string]string{"name": "Spirit", "launchDate": "2003-06-10", "status": "Inactive"}
+	dataB = append(dataB, dataB1, dataB2, dataB3)
+	data := []MarsRover2{
+		{Name: "Perseverance", LaunchDate: "2020-07-30", Status: "Active"},
+		{Name: "Curiosity", LaunchDate: "2011-11-26", Status: "Active"},
+		{Name: "Spirit", LaunchDate: "2003-06-10", Status: "Inactive"},
+	}
+	filename := "rovers.json"
+	jsonData, _ := json.MarshalIndent(data, "", "    ") //格式化，空行
+	_ = os.WriteFile(filename, jsonData, 0644)
+	// 读取并追加json数据
+	jsonFile, _ := os.Open(filename)
+	defer jsonFile.Close()
+	byteDate, _ := io.ReadAll(jsonFile)
+	dSlice := new([]MarsRover2)
+	_ = json.Unmarshal(byteDate, dSlice)
+	for _, value := range *dSlice {
+		fmt.Println(reflect.TypeOf(value), value)
+	}
+	*dSlice = append(*dSlice, MarsRover2{Name: "Natalia", LaunchDate: "2002-01-01", Status: "Active"})
+	jsonData, _ = json.MarshalIndent(dSlice, "", "    ")
+	_ = os.WriteFile(filename, jsonData, 0644)
+	// 以追加模式和写权限打开文件(这会破坏Json结构)
+	file, _ := os.OpenFile(filename, os.O_APPEND|os.O_WRONLY, 0644)
+	defer file.Close()
+	// 追加字符串 "hello world" 到文件末尾
+	_, _ = file.WriteString("\nhello world")
 }
