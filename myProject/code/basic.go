@@ -116,6 +116,7 @@ func Struct2Map() {
 }
 
 func DemoConvert() {
+	// golang中无法直接将map类型的数据转换成struct，需要使用json作为第三方进行中转
 	// 可以看到无论是map还是struct都可以转成json数据，但是反之则不一定
 	Struct2Map()
 	fmt.Println(strings.Repeat("*", 100))
