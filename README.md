@@ -56,3 +56,20 @@ gopath
 
 go mod init
 
+# Golang IDE
+# go module 
+```
+文件夹结构：
+kevin
+    golang
+        example
+        main.go
+
+在 golang 文件夹下  go mod init golang
+
+在 goland 中启用 go 模块集成 ！！！《不然IDE无法识别》
+
+在 main 中 import golang/example 使用
+```
+
+
